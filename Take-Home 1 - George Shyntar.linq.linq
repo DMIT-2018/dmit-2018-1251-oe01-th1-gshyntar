@@ -77,3 +77,15 @@ Employees
 		WorkLoad = x.ClassOfferings.Count() > 24 ? "High" : x.ClassOfferings.Count() > 8 ? "Med" : "Low",
 	})
 	.Dump();
+	
+//Question 5
+Clubs
+	.OrderByDescending(x => x.ClubMembers.Count())
+	.Select(x => new
+	{
+		Supervisor = (x.EmployeeID == null) ? "Unknown" : (x.Employee.FirstName + " " + x.Employee.LastName),
+		Club = x.ClubName,
+		MemberCount = x.ClubMembers.Count(),
+		Activities = x.ClubActivities.Count() == 0 ? "None Schedule" : x.ClubActivities.Count().ToString()
+	})
+	.Dump();
