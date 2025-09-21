@@ -33,3 +33,16 @@ ClubActivities
 	})
 	.Dump();
 	
+//Question 2
+Programs
+	.Where(x => x.ProgramCourses.Count(t => t.Required == true) >= 22)
+	.OrderBy(x => x.ProgramName)
+	.Select(x => new
+	{
+		School = x.SchoolCode == "SAMIT" ? "School of Advance Media and IT" : x.SchoolCode == "SEET" ? "School of Electrical Engineering Technology" : "Unknown",
+		Program = x.ProgramName,
+		RequiredCourseCount = x.ProgramCourses.Count(t => t.Required == true),
+		OptionalCourseCount = x.ProgramCourses.Count(t => t.Required == false)
+	
+	})
+	.Dump();
