@@ -22,12 +22,12 @@
 //	}).Dump();
 
 ClubActivities
-	.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Name != "Btech Club Meeting" && x.Location != "Scheduled Room")
+	.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Name != "Btech Club Meeting" && x.CampusVenue.Location != "Scheduled Room")
 	.OrderBy(x => x.StartDate.Value)
 	.Select(x => new
 	{
 		StartDate = x.StartDate.Value,
-		Location = x.Location,
+		Location = x.CampusVenue.Location,
 		Club = x.Club.ClubName,
 		Activity = x.Name
 	})
