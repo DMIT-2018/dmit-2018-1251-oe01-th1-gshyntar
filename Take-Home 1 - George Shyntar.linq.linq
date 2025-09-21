@@ -46,3 +46,21 @@ Programs
 	
 	})
 	.Dump();
+	
+//Question 3
+Students
+	.Where(x => x.Countries.CountryName != "CANADA" && x.StudentPayments.Count() == 0)
+	.OrderBy(x => x.LastName)
+	.Select(x => new
+	{
+		//ClubMembershipCount = x.ClubID.Count()
+		
+		//ClubMembershipCount = x.MemberID,
+		//ClubMembershipCount = x.StudentNumber,
+		StudentNumber = x.StudentNumber,
+		CountryName = x.Countries.CountryName,
+		FullName = x.FirstName + " " + x.LastName,
+		ClubMembershipCount = x.ClubMembers.Count() == 0 ? "None" : x.ClubMembers.Count().ToString()
+		
+	})
+	.Dump();
