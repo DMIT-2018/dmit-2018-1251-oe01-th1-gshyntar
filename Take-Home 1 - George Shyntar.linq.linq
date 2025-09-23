@@ -21,9 +21,10 @@
 //	Location = x.Location
 //	}).Dump();
 
+//Order by generally goes after the select, only times it should be before is if the variable is not in the select
+
 ClubActivities
 	.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Name != "Btech Club Meeting" && x.CampusVenue.Location != "Scheduled Room")
-	.OrderBy(x => x.StartDate.Value)
 	.Select(x => new
 	{
 		StartDate = x.StartDate.Value,
@@ -31,12 +32,12 @@ ClubActivities
 		Club = x.Club.ClubName,
 		Activity = x.Name
 	})
+	.OrderBy(x => x.StartDate)
 	.Dump();
 	
 //Question 2
 Programs
 	.Where(x => x.ProgramCourses.Count(t => t.Required == true) >= 22)
-	.OrderBy(x => x.ProgramName)
 	.Select(x => new
 	{
 		School = x.SchoolCode == "SAMIT" ? "School of Advance Media and IT" : x.SchoolCode == "SEET" ? "School of Electrical Engineering Technology" : "Unknown",
@@ -45,6 +46,7 @@ Programs
 		OptionalCourseCount = x.ProgramCourses.Count(t => t.Required == false)
 	
 	})
+	.OrderBy(x => x.Program)
 	.Dump();
 	
 //Question 3
@@ -80,7 +82,6 @@ Employees
 	
 //Question 5
 Clubs
-	.OrderByDescending(x => x.ClubMembers.Count())
 	.Select(x => new
 	{
 		Supervisor = (x.EmployeeID == null) ? "Unknown" : (x.Employee.FirstName + " " + x.Employee.LastName),
@@ -88,4 +89,5 @@ Clubs
 		MemberCount = x.ClubMembers.Count(),
 		Activities = x.ClubActivities.Count() == 0 ? "None Schedule" : x.ClubActivities.Count().ToString()
 	})
+	.OrderByDescending(x => x.MemberCount)
 	.Dump();
