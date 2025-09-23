@@ -1,5 +1,5 @@
 # Basic Starter Kit
 
-## Owner your name
+## George Shyntar
 
-alter this statement to indicate the usage of this repository
+This is the repository for DMIT2018 Simple LINQ exercise OE01
